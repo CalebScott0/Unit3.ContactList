@@ -9,8 +9,14 @@ function App() {
   return (
     <div>
       {/* toggle selectedContact view */}
-      {selectedContactId ? <SelectedContact selectedContactId={selectedContactId} setSelectedContactId={setSelectedContactId}/> 
-      : <ContactList setSelectedContactId={setSelectedContactId}/>}
+      {selectedContactId ? (
+        <SelectedContact
+          selectedContactId={selectedContactId}
+          setSelectedContactId={setSelectedContactId}
+        />
+      ) : (
+        <ContactList setSelectedContactId={setSelectedContactId} />
+      )}
     </div>
   );
 }

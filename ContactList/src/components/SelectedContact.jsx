@@ -1,63 +1,77 @@
 import { useState, useEffect } from "react";
 
-export default function SelectedContact( {selectedContactId, setSelectedContactId }) {
-// MAKE SURE THERE IS A BACK BUTTON FOR USER TO RETURN TO FULL CONTACT LIST 
-// data from api is an object
-// figure out what data you want to include
-const [contact, setContact] = useState({});
-
-useEffect(() => {
+// deconstruct pass down props selectedContactId and setSelectedContactId
+export default function SelectedContact({
+  selectedContactId,
+  setSelectedContactId,
+}) {
+  const [contact, setContact] = useState({});
+  useEffect(() => {
     async function fetchContact() {
-    try {
-        const response = await fetch (`https://fsa-jsonplaceholder-69b5c48f1259.herokuapp.com/users/${selectedContactId}`);
+      try {
+        // fetch user with selectedContactID as their id
+        const response = await fetch(
+          `https://fsa-jsonplaceholder-69b5c48f1259.herokuapp.com/users/${selectedContactId}`
+        );
         const json = await response.json();
+        // set contact state
         setContact(json);
-
-    } catch(error) {
+      } catch (error) {
         console.log(error);
-    }
+      }
     }
     fetchContact();
-}, [])
-
-return (
+  }, []);
+  return (
     <div>
-    {/* {console.log(contact.name)} */}
-    
-    <table>
+      <table className="selected-contact-table">
         <thead>
-            <tr>
-                <th colSpan = "6">Contact info for {contact.name}</th>
-            </tr>
+          <tr>
+            <th colSpan="6">
+              Contact Info For{" "}
+              <span className="contact-name">{contact.name}</span>
+            </th>
+          </tr>
         </thead>
         <tbody>
-            <tr>
-                <td> </td>
-            </tr>
+          <tr>
+            <td className="col-head">Username</td>
+            <td className="col-head">Email</td>
+            <td className="col-head">Address</td>
+            <td className="col-head">Phone</td>
+            <td className="col-head">Website</td>
+            <td className="col-head">Company</td>
+          </tr>
+          <tr>
+            <td>{contact.username}</td>
+            <td>{contact.email}</td>
+            <td>
+              {/* will only access contact.address once data is loaded into contact from fetch */}
+              {contact.address ? (
+                <div>
+                  <p>{contact.address.suite}</p>
+                  <p>{contact.address.street}</p>
+                  <p>{contact.address.city}</p>
+                </div>
+              ) : (
+                ""
+              )}
+            </td>
+            <td>{contact.phone}</td>
+            <td>{contact.website}</td>
+            {/* will only access contact.company once data is loaded into contact from fetch */}
+            <td>{contact.company ? contact.company.name : ""}</td>
+          </tr>
         </tbody>
-
-    </table>
-    <button onClick={() => {
-        setSelectedContactId(null);
-    }}>Return</button>
+      </table>
+      {/* will reset selectedContactId to null and rerender full contact list from logic in App */}
+      <button
+        onClick={() => {
+          setSelectedContactId(null);
+        }}
+      >
+        Return
+      </button>
     </div>
-);
-
+  );
 }
-
-// {
-//     "name": "Mrs. Jerald Schulist",
-//     "username": "Antwan",
-//     "email": "Coby_Zieme@libby.tv",
-//     "address": {
-//       "street": "Morissette Heights",
-//       "suite": "Apt. 633",
-//       "city": "Port Liashire",
-//       }
-//     },
-//     "phone": "(663)839-3814 x845",
-//     "website": "arvel.io",
-//     "company": {
-//       "name": "D'Amore-Krajcik",
-//     }
-//   }

@@ -23,7 +23,8 @@ export default function ContactList({setSelectedContactId}) {
     fetchContacts();
   }, []);
   return (
-    <table>
+    <div>
+    <table className="contact-list-table">
       <thead>
         <tr>
           <th colSpan="3">Contact List</th>
@@ -41,5 +42,6 @@ export default function ContactList({setSelectedContactId}) {
         })}
       </tbody>
     </table>
+    </div>
   );
 }

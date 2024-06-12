@@ -5,21 +5,48 @@ body {
   color: #f5f6f7;
 }
 
-table {
-  width: 60%;
-  margin: 10px auto;
+p {
+  margin: 0;
 }
 
 th {
   font-size: 2em;
+  padding: 1em 0;
 }
 
-td { 
-  width: calc(100%/3);
-  padding: 5px;
+td {
+  border: 2px solid #f5f6f78f;
+  padding: 10px;
 }
-
+/* table column headers */
 .col-head {
   font-size: 1.5em;
   font-weight: bold;
+  padding-bottom: 0.5em;
+}
+
+/* full contact list table */
+.contact-list-table {
+  width: 60%;
+  margin: 10px auto;
+}
+
+.contact-row { 
+  width: calc(100%/3);
+}
+
+/* sinle contact table view */
+.selected-contact-table {
+  width: 80%;
+  margin: 10px auto;
+}
+
+.contact-name {
+  text-decoration: underline;
+  text-decoration-color: #adc8498f;
+}
+button {
+  margin-top: 2em;
+  height: 30px;
+  width: 100px;
 }
