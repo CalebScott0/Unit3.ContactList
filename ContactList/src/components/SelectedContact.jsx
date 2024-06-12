@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 
-// deconstruct pass down props selectedContactId and setSelectedContactId
+// deconstruct passed down selectedContactId and setSelectedContactId from props
 export default function SelectedContact({
   selectedContactId,
   setSelectedContactId,
@@ -22,7 +22,7 @@ export default function SelectedContact({
     }
     fetchContact();
   }, []);
-  return (
+  return(
     <div>
       <table className="selected-contact-table">
         <thead>

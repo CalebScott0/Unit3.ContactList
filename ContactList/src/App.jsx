@@ -8,7 +8,7 @@ function App() {
 
   return (
     <div>
-      {/* toggle selectedContact view */}
+      {/* toggle selectedContact view and pass props down to components*/}
       {selectedContactId ? (
         <SelectedContact
           selectedContactId={selectedContactId}

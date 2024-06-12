@@ -7,41 +7,50 @@ const dummyContacts = [
   { id: 3, name: "BB-8", phone: "888-888-8888", email: "bb8@droids.com" },
 ];
 
-export default function ContactList({setSelectedContactId}) {
+// setSelectedContactId passed down from props
+export default function ContactList({ setSelectedContactId }) {
   const [contacts, setContacts] = useState(dummyContacts);
 
   useEffect(() => {
     async function fetchContacts() {
-        try {
-            const response = await fetch("https://fsa-jsonplaceholder-69b5c48f1259.herokuapp.com/users");
-            const json = await response.json();
-            setContacts(json);
-        } catch(error) {
-            console.log(error);
-        }
+      try {
+        const response = await fetch(
+          "https://fsa-jsonplaceholder-69b5c48f1259.herokuapp.com/users"
+        );
+        const json = await response.json();
+        setContacts(json);
+      } catch (error) {
+        console.log(error);
+      }
     }
     fetchContacts();
   }, []);
   return (
     <div>
-    <table className="contact-list-table">
-      <thead>
-        <tr>
-          <th colSpan="3">Contact List</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td className="col-head">Name</td>
-          <td className="col-head">Email</td>
-          <td className="col-head">Phone</td>
-        </tr>
-        {/* map out contacts from API fetch using contact row component, pass contact and setSelectedContactId as props */}
-        {contacts.map((contact) => {
-          return <ContactRow key={contact.id} contact={contact} setSelectedContactId={setSelectedContactId}/>;
-        })}
-      </tbody>
-    </table>
+      <table className="contact-list-table">
+        <thead>
+          <tr>
+            <th colSpan="3">Contact List</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td className="col-head">Name</td>
+            <td className="col-head">Email</td>
+            <td className="col-head">Phone</td>
+          </tr>
+          {/* map out contacts from API fetch using contact row component, pass contact and setSelectedContactId as props */}
+          {contacts.map((contact) => {
+            return (
+              <ContactRow
+                key={contact.id}
+                contact={contact}
+                setSelectedContactId={setSelectedContactId}
+              />
+            );
+          })}
+        </tbody>
+      </table>
     </div>
   );
 }
