@@ -22,7 +22,7 @@ export default function SelectedContact({
     }
     fetchContact();
   }, []);
-  return(
+  return (
     <div>
       <table className="selected-contact-table">
         <thead>
